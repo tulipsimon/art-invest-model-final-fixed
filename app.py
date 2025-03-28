@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -20,7 +19,8 @@ with tabs[0]:
         "收入潜力", "成本控制", "审美折旧率"
     ]
 
-    scores = [st.sidebar.slider(category, 1, 5, 3) for category in categories]
+    # 默认评分（可替换为交互 slider）
+    scores = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
 
     st.subheader("📋 打分总览")
     data = pd.DataFrame({"维度": categories, "评分": scores})
@@ -56,13 +56,14 @@ with tabs[0]:
 with tabs[1]:
     st.subheader("💰 财务预测模型（单位：万元）")
 
-base_price = 30  # 万元
-annual_growth = 0.12  # 12%
-penetration = 0.6     # 60%
-years = 5             # 5年预测期
-fixed_costs = 10      # 万元
-variable_cost_ratio = 0.4  # 40%
-aesthetic_depreciation = -0.03  # -3%
+    # ✅ 默认参数写入
+    base_price = 3
+    annual_growth = 0.12
+    penetration = 0.6
+    years = 5
+    fixed_costs = 300
+    variable_cost_ratio = 0.4
+    aesthetic_depreciation = -0.03
 
     revenue = [(base_price * ((1 + annual_growth) ** y)) * penetration for y in range(1, years + 1)]
     costs = [(base_price * variable_cost_ratio + fixed_costs) for _ in range(years)]
@@ -108,3 +109,4 @@ with tabs[2]:
     ax3.set_title("不同涨幅情境下的收入预测")
     ax3.legend()
     st.pyplot(fig3)
+
