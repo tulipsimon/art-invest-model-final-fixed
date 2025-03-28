@@ -56,14 +56,13 @@ with tabs[0]:
 with tabs[1]:
     st.subheader("💰 财务预测模型（单位：万元）")
 
-    base_price = st.number_input("初始售价", 1, 200, 30)
-    annual_growth = st.slider("年涨幅 %", 0, 50, 12) / 100
-    penetration = st.slider("市场渗透率 %", 0, 100, 60) / 100
-    years = st.slider("评估周期（年）", 1, 10, 5)
-
-    fixed_costs = st.number_input("固定成本（展览、运输等）", 0, 200, 10)
-    variable_cost_ratio = st.slider("可变成本占比 %", 0, 100, 40) / 100
-    aesthetic_depreciation = st.slider("审美折旧率 %", -10, 0, -3) / 100
+base_price = 30  # 万元
+annual_growth = 0.12  # 12%
+penetration = 0.6     # 60%
+years = 5             # 5年预测期
+fixed_costs = 10      # 万元
+variable_cost_ratio = 0.4  # 40%
+aesthetic_depreciation = -0.03  # -3%
 
     revenue = [(base_price * ((1 + annual_growth) ** y)) * penetration for y in range(1, years + 1)]
     costs = [(base_price * variable_cost_ratio + fixed_costs) for _ in range(years)]
